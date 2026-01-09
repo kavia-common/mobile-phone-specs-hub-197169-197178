@@ -1,82 +1,58 @@
-# Lightweight React Template for KAVIA
+# Mobile Phone Specs Hub (Frontend)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A lightweight React UI for browsing recent phone posts, searching, and opening individual spec pages.
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Homepage grid of recent phone posts
+- Search with debounced input
+  - Client-side filtering for the built-in sample dataset
+  - Optional server-side query when a backend is configured
+- Phone detail pages with clear sections:
+  - Display, Chipset, Camera, Memory & Storage, Battery
+- Routing:
+  - `/` (home)
+  - `/phone/:slug` (details)
 
 ## Getting Started
 
-In the project directory, you can run:
+In the `frontend/` directory:
 
 ### `npm start`
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the app in development mode.  
+Open http://localhost:3000 to view it in your browser.
 
 ### `npm test`
 
-Launches the test runner in interactive watch mode.
+Runs unit tests.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production.
 
-## Customization
+## Backend/API Configuration (optional)
 
-### Colors
+By default, the UI uses a small in-memory sample dataset.
 
-The main brand colors are defined as CSS variables in `src/App.css`:
+To connect to a backend API, set either of these environment variables:
 
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
+- `REACT_APP_API_BASE` (preferred)
+- `REACT_APP_BACKEND_URL` (fallback)
 
-### Components
+The app will attempt to call:
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+- `GET {REACT_APP_API_BASE}/phones` (list)
+- `GET {REACT_APP_API_BASE}/phones?search=...` (optional server-side search)
+- `GET {REACT_APP_API_BASE}/phones/{slug}` (detail)
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+If requests fail (or the backend is not configured), it automatically falls back to the sample dataset.
 
-## Learn More
+## Styling
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project uses plain CSS (single approach) with a light modern theme:
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Accents: `#3b82f6` and `#06b6d4`
+- Background: `#f9fafb`
+- Surface: `#ffffff`
+- Text: `#111827`
